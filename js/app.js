@@ -1,30 +1,15 @@
-import { createLiter } from './addComponent.js'
+import { /* createLiter, */ Keyboard } from './keyboard.js'
 
-// * add style in html
-const style = window.document.createElement('link')
-style.href = "./css/style.css"
-style.rel = "stylesheet"
-window.document.getElementsByTagName('head')[0].appendChild(style)
-
-const body = document.querySelector('body')
-
- // * add container
-const container = document.createElement('div')
-container.classList.add('container')
-document.body.appendChild(container)
-
-// * add title
-const title = document.createElement('p')
-title.classList.add('title')
-title.innerHTML = 'Виртуальная клавиатура'
-container.appendChild(title)
-
-// * add textArea
-const textArea = document.createElement('textarea')
-textArea.classList.add('textarea')
-container.appendChild(textArea)
-
+Keyboard.init()
 
 // test
-const component = createLiter('R') // example
-body.appendChild(component)
+
+// console.log(Keyboard.lang)
+const row = []
+document.onkeydown = function (event) {
+  // row.push(event.code)
+  // console.log(event)
+  console.log(event.key)
+	console.log(String.fromCharCode(event.keyCode))
+}
+// const component = createLiter('R') // example
