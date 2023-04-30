@@ -1,26 +1,23 @@
-import { Keyboard } from "./keyboard.js";
+import { Keyboard } from './keyboard.js';
 
 Keyboard.init(); // create html
 Keyboard.languageHidden(); // hide not use language
 Keyboard.changeLanguage();
 // active from keyDown keyboard
-document.onkeydown = function (event) {
-  Keyboard.buttonActivate(event)
-}
+document.onkeydown = (event) => Keyboard.buttonActivate(event);
+
 // deactivate from keyUp keyboard
-document.onkeyup = function (event) {
-  Keyboard.buttonDeactivate(event)
-}
+document.onkeyup = (event) => Keyboard.buttonDeactivate(event);
 // active from mouse
-document.querySelectorAll('.keyboard-key').forEach(e => e.addEventListener('mousedown', function () {
-  const code = e.classList[2]
-  document.querySelector(`.${code}`).classList.add('active')
-}))
+document.querySelectorAll('.keyboard-key').forEach((e) => e.addEventListener('mousedown', () => {
+  const code = e.classList[2];
+  document.querySelector(`.${code}`).classList.add('active');
+}));
 // deactivate from mouse
-document.querySelectorAll('.keyboard-key').forEach(e => e.addEventListener('mouseup', function () {
-  const code = e.classList[2]
-  document.querySelector(`.${code}`).classList.remove('active')
-}))
+document.querySelectorAll('.keyboard-key').forEach((e) => e.addEventListener('mouseup', () => {
+  const code = e.classList[2];
+  document.querySelector(`.${code}`).classList.remove('active');
+}));
 
 // test
 // const row = [];
