@@ -1,5 +1,5 @@
 html {
-    background: #420000;
+    background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(42,0,0,1));
 }
 .container {
     margin: 0 auto;
@@ -71,7 +71,7 @@ html {
 }
 
 .keyboard .key.active {
-    background-color: #2cfd72;
+    background-color: #fd2c2c;
     border-radius: 50px;
 }
 

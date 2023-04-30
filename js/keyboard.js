@@ -1,6 +1,6 @@
-const CssClasses = {
-  LETTER: "letter",
-};
+// const CssClasses = {
+//   LETTER: "letter",
+// };
 
 const elementsRus = [
   [
@@ -320,6 +320,19 @@ const Keyboard = {
       pressed.delete(event.code);
     });
   },
+
+  buttonActivate(e) {
+    document.querySelector(`.${e.code}`).classList.add('active')
+  },
+
+  buttonDeactivate(e) {
+    document.querySelectorAll('.keyboard-key')
+      .forEach(e => e.classList.remove('active'))
+  },
+
+  mouseActivate(e) {
+    console.log(e.classList)
+  }
 };
 
 export { Keyboard };
