@@ -1,5 +1,5 @@
 html {
-    background: #444444;
+    background: #420000;
 }
 .container {
     margin: 0 auto;
@@ -67,17 +67,17 @@ html {
 }
 
 .keyboard .key:hover {
-    background: #79aa89
+    background: #aa7979;
 }
 
 .keyboard .key.active {
     background-color: #2cfd72;
-    border-radius: 50px
+    border-radius: 50px;
 }
 
 .keyboard .AltLeft,.keyboard .AltRight,.keyboard .ArrowUp,.keyboard .ArrowLeft,.keyboard .ArrowDown,.keyboard .ArrowRight,.keyboard .Backspace,.keyboard .CapsLock,.keyboard .ControlLeft,.keyboard .ControlRight,.keyboard .Delete,.keyboard .Enter,.keyboard .ShiftLeft,.keyboard .ShiftRight,.keyboard .Tab,.keyboard .MetaLeft {
     font-weight: 600;
-    background-color: #222222
+    background-color: #420000;
 }
 
 .keyboard .Tab {
