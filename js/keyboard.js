@@ -1,7 +1,3 @@
-// const CssClasses = {
-//   LETTER: "letter",
-// };
-
 const elementsRus = [
   [
     ["Backquote", "ё", "Ё"],
@@ -74,7 +70,7 @@ const elementsRus = [
     ["AltRight", "Alt", "Alt"],
     ["ArrowLeft", "◄", "◄"],
     ["ArrowDown", "▼", "▼"],
-    ["ArrowRight", "▼", "▼"],
+    ["ArrowRight", "►", "►"],
     ["ControlRight", "Ctrl", "Ctrl"],
   ],
 ];
@@ -83,7 +79,7 @@ const elementsEng = [
   [
     ["Backquote", "`", "~"],
     ["Digit1", "1", "!"],
-    ["Digit2", "2", '@'],
+    ["Digit2", "2", "@"],
     ["Digit3", "3", "#"],
     ["Digit4", "4", "$"],
     ["Digit5", "5", "%"],
@@ -151,9 +147,24 @@ const elementsEng = [
     ["AltRight", "Alt", "Alt"],
     ["ArrowLeft", "◄", "◄"],
     ["ArrowDown", "▼", "▼"],
-    ["ArrowRight", "▼", "▼"],
+    ["ArrowRight", "►", "►"],
     ["ControlRight", "Ctrl", "Ctrl"],
   ],
+];
+
+const notWritingElemements = [
+  "Backspace",
+  "Tab",
+  "Delete",
+  "CapsLock",
+  "Enter",
+  "ShiftLeft",
+  "ShiftRight",
+  "ControlLeft",
+  "MetaLeft",
+  "AltLeft",
+  "AltRight",
+  "ControlRight",
 ];
 
 const Keyboard = {
@@ -242,7 +253,7 @@ const Keyboard = {
         shiftCapsEng.classList.add("shiftCaps");
         shiftCapsEng.innerHTML = elementsEng[i][j][1];
         // add english cards
-        cardEng.appendChild(caseDownEng)
+        cardEng.appendChild(caseDownEng);
         // todo delete comments when implements functions
         // cardEng.appendChild(caseUpEng)
         // cardEng.appendChild(capsEng)
@@ -271,7 +282,7 @@ const Keyboard = {
 
   languageHidden() {
     const language = localStorage.getItem("lang") || "rus";
-    
+
     if (language === "rus") {
       document
         .querySelectorAll(".rus")
@@ -292,47 +303,55 @@ const Keyboard = {
   },
 
   changeLanguage() {
-    const codes = ["ControlLeft", "AltLeft"]
+    const codes = ["ControlLeft", "AltLeft"];
     let pressed = new Set();
-  
-    document.addEventListener('keydown', function(event) {
+
+    document.addEventListener("keydown", function (event) {
       pressed.add(event.code);
-  
+
       for (let code of codes) {
         if (!pressed.has(code)) {
           return;
         }
       }
       pressed.clear();
-  
+
       // function for changing language
-      this.lang = localStorage.getItem('lang')
-      if (this.lang === 'rus') {
-        localStorage.setItem("lang", "eng")
-        Keyboard.languageHidden()
+      this.lang = localStorage.getItem("lang");
+      if (this.lang === "rus") {
+        localStorage.setItem("lang", "eng");
+        Keyboard.languageHidden();
       } else {
-        localStorage.setItem("lang", "rus")
-        Keyboard.languageHidden()
+        localStorage.setItem("lang", "rus");
+        Keyboard.languageHidden();
       }
     });
-  
-    document.addEventListener('keyup', function(event) {
+
+    document.addEventListener("keyup", function (event) {
       pressed.delete(event.code);
     });
   },
 
   buttonActivate(e) {
-    document.querySelector(`.${e.code}`).classList.add('active')
+    const activeElement = document.querySelector(`.${e.code}`);
+    const textArea = document.querySelector(".textarea");
+
+    activeElement.classList.add(`active`);
+    const child = activeElement.querySelector(`.${this.lang}`);
+    if (!notWritingElemements.includes(e.code)) {
+      textArea.value += child.innerText;
+    }
   },
 
   buttonDeactivate(e) {
-    document.querySelectorAll('.keyboard-key')
-      .forEach(e => e.classList.remove('active'))
+    document
+      .querySelectorAll(".keyboard-key")
+      .forEach((e) => e.classList.remove("active"));
   },
 
   mouseActivate(e) {
-    console.log(e.classList)
-  }
+    console.log(e.classList);
+  },
 };
 
 export { Keyboard };
