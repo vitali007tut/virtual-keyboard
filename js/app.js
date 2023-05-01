@@ -1,7 +1,7 @@
-import { Keyboard } from './keyboard.js';
+import Keyboard from './keyboard.js';
 
-Keyboard.init(); // create html
-Keyboard.languageHidden(); // hide not use language
+Keyboard.init(); // * create html
+Keyboard.languageHidden(); // *hide not use language
 Keyboard.changeLanguage();
 // active from keyDown keyboard
 document.onkeydown = (event) => Keyboard.buttonActivate(event);
@@ -18,11 +18,3 @@ document.querySelectorAll('.keyboard-key').forEach((e) => e.addEventListener('mo
   const code = e.classList[2];
   document.querySelector(`.${code}`).classList.remove('active');
 }));
-
-// test
-// const row = [];
-// document.onkeydown = function (event) {
-//   row.push(event.code)
-//   console.log(event)
-//   console.log(event.code)
-// };

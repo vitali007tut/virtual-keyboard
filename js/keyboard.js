@@ -310,10 +310,8 @@ const Keyboard = {
     document.addEventListener('keydown', function keyDown(event) {
       pressed.add(event.code);
 
-      for (const code of codes) {
-        if (!pressed.has(code)) {
-          return;
-        }
+      if (!pressed.has(codes[0]) || !pressed.has(codes[1])) {
+        return;
       }
       pressed.clear();
 
@@ -358,4 +356,4 @@ const Keyboard = {
   },
 };
 
-export { Keyboard };
+export default Keyboard;
