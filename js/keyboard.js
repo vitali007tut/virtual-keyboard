@@ -1,3 +1,9 @@
+/*
+! in /js run
+npx eslint app.js --fix
+npx eslint keyboard.js--fix
+*/
+
 const elementsRus = [
   [
     ['Backquote', 'ё', 'Ё', 'Ё', 'ё'],
@@ -153,11 +159,12 @@ const elementsEng = [
 ];
 
 const notWritingElemements = [
-  'Backspace',
-  'Tab',
-  'Delete',
+  'Backspace', // *
+  'Tab', // *
+  'Delete', // *
   'CapsLock',
-  'Enter',
+  'Space', // *
+  'Enter', // *
   'ShiftLeft',
   'ShiftRight',
   'ControlLeft',
@@ -346,13 +353,50 @@ const Keyboard = {
   },
 
   buttonActivate(e) {
-    const activeElement = document.querySelector(`.${e.code}`);
+    let eCode = e.code;
+    if (eCode === 'NumpadEnter') eCode = 'Enter';
+    const activeElement = document.querySelector(`.${eCode}`);
     const textArea = document.querySelector('.textarea');
     activeElement.classList.add('active');
     const activeLang = localStorage.getItem('lang');
     const child = activeElement.querySelector(`.${activeLang}`);
-    if (!notWritingElemements.includes(e.code)) {
-      textArea.value += child.innerText;
+    let cursor = textArea.selectionStart;
+    const left = textArea.value.slice(0, cursor);
+    const right = textArea.value.slice(cursor);
+
+    if (!notWritingElemements.includes(eCode)) {
+      textArea.value = left + child.innerText + right;
+      cursor += 1;
+      textArea.setSelectionRange(cursor, cursor);
+    } else {
+      switch (eCode) {
+        case 'Enter':
+          textArea.value = `${left}\n${right}`;
+          cursor += 1;
+          textArea.setSelectionRange(cursor, cursor);
+          break;
+        case 'Space':
+          textArea.value = `${left} ${right}`;
+          cursor += 1;
+          textArea.setSelectionRange(cursor, cursor);
+          break;
+        case 'Tab':
+          textArea.value = `${left}  ${right}`;
+          cursor += 2;
+          textArea.setSelectionRange(cursor, cursor);
+          break;
+        case 'Backspace':
+          textArea.value = `${left.slice(0, -1)}${right}`;
+          cursor -= 1;
+          textArea.setSelectionRange(cursor, cursor);
+          break;
+        case 'Delete':
+          textArea.value = `${left}${right.slice(1)}`;
+          textArea.setSelectionRange(cursor, cursor);
+          break;
+        default:
+          break;
+      }
     }
   },
 
@@ -366,8 +410,43 @@ const Keyboard = {
     const textArea = document.querySelector('.textarea');
     const activeLang = localStorage.getItem('lang');
     const child = e.querySelector(`.${activeLang}`);
-    if (!notWritingElemements.includes(e.classList.value.split(' ')[2])) {
-      textArea.value += child.innerText;
+    let cursor = textArea.selectionStart;
+    const left = textArea.value.slice(0, cursor);
+    const right = textArea.value.slice(cursor);
+    const eCode = e.classList.value.split(' ')[2];
+    if (!notWritingElemements.includes(eCode)) {
+      textArea.value = left + child.innerText + right;
+      cursor += 1;
+      textArea.setSelectionRange(cursor, cursor);
+    } else {
+      switch (eCode) {
+        case 'Enter':
+          textArea.value = `${left}\n${right}`;
+          cursor += 1;
+          textArea.setSelectionRange(cursor, cursor);
+          break;
+        case 'Space':
+          textArea.value = `${left} ${right}`;
+          cursor += 1;
+          textArea.setSelectionRange(cursor, cursor);
+          break;
+        case 'Tab':
+          textArea.value = `${left}  ${right}`;
+          cursor += 2;
+          textArea.setSelectionRange(cursor, cursor);
+          break;
+        case 'Backspace':
+          textArea.value = `${left.slice(0, -1)}${right}`;
+          cursor -= 1;
+          textArea.setSelectionRange(cursor, cursor);
+          break;
+        case 'Delete':
+          textArea.value = `${left}${right.slice(1)}`;
+          textArea.setSelectionRange(cursor, cursor);
+          break;
+        default:
+          break;
+      }
     }
   },
 };

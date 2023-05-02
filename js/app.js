@@ -1,3 +1,9 @@
+/*
+! in /js run
+npx eslint app.js --fix
+npx eslint keyboard.js--fix
+*/
+
 import Keyboard from './keyboard.js';
 
 Keyboard.init(); // * create html
