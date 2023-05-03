@@ -176,6 +176,7 @@ const notWritingElemements = [
 
 const Keyboard = {
   lang: localStorage.getItem('lang'),
+  notUseKey: ['Escape', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'ScrollLock', 'Pause', 'NumLock', 'NumpadDivide', 'NumpadMultiply', 'NumpadSubtract', 'NumpadAdd', 'Numpad0', 'Numpad1', 'Numpad2', 'Numpad3', 'Numpad4', 'Numpad5', 'Numpad6', 'Numpad7', 'Numpad8', 'Numpad9', 'NumpadDecimal'],
 
   init() {
     if (!localStorage.getItem('lang')) {
@@ -304,7 +305,6 @@ const Keyboard = {
       document
         .querySelectorAll('.eng')
         .forEach((e) => e.classList.add('hidden'));
-      // localStorage.setItem("lang", "rus");
     } else {
       document
         .querySelectorAll('.eng')
@@ -312,7 +312,6 @@ const Keyboard = {
       document
         .querySelectorAll('.rus')
         .forEach((e) => e.classList.add('hidden'));
-      // localStorage.setItem("lang", "eng");
     }
   },
 
@@ -358,6 +357,9 @@ const Keyboard = {
 
   buttonActivate(e) {
     let eCode = e.code;
+    if (this.notUseKey.includes(eCode)) {
+      return;
+    }
     if (eCode === 'NumpadEnter') eCode = 'Enter';
     const activeElement = document.querySelector(`.${eCode}`);
     const textArea = document.querySelector('.textarea');
