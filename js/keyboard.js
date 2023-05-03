@@ -363,7 +363,6 @@ const Keyboard = {
     let cursor = textArea.selectionStart;
     const left = textArea.value.slice(0, cursor);
     const right = textArea.value.slice(cursor);
-
     if (!notWritingElemements.includes(eCode)) {
       textArea.value = left + child.innerText + right;
       cursor += 1;

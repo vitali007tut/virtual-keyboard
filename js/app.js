@@ -1,7 +1,7 @@
 /*
 ! in /js run
 npx eslint app.js --fix
-npx eslint keyboard.js--fix
+npx eslint keyboard.js --fix
 */
 
 import Keyboard from './keyboard.js';
