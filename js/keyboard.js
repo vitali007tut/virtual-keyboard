@@ -178,6 +178,10 @@ const Keyboard = {
   lang: localStorage.getItem('lang'),
 
   init() {
+    if (!localStorage.getItem('lang')) {
+      this.lang = 'rus';
+      localStorage.setItem('lang', 'rus');
+    }
     // * add style in html
     const style = window.document.createElement('link');
     style.href = './css/style.css';
@@ -291,7 +295,7 @@ const Keyboard = {
   },
 
   languageHidden() {
-    const language = localStorage.getItem('lang') || 'rus';
+    const language = localStorage.getItem('lang');
 
     if (language === 'rus') {
       document
